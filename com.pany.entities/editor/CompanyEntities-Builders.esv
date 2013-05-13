@@ -11,7 +11,7 @@ builders
 
 builders
                                                                                                                             
-  provider : include/companyentities.ctree                                                                                  
+  provider : include/companyentities.jar                                                                                  
   provider : include/companyentities-java.jar                                                                               
                                                                                                                             
   observer : editor-analyze                        (multifile)                                                              

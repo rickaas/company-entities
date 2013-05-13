@@ -50,5 +50,5 @@
 			  </path>
     
         <!-- Main target -->
-        <target name="all" depends="spoofaximp.default.ctree"/>
+        <target name="all" depends="spoofaximp.default.jar"/>
     </project>
