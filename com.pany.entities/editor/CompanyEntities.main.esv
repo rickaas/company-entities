@@ -1,0 +1,17 @@
+
+module CompanyEntities.main
+
+imports CompanyEntities-Builders CompanyEntities-Refactorings CompanyEntities-Colorer CompanyEntities-Completions CompanyEntities-Folding CompanyEntities-Outliner CompanyEntities-References CompanyEntities-Syntax
+
+language General properties
+                  
+  name          : CompanyEntities
+  id            : com.pany.entities
+  extends       : Root
+                  
+  description   : "Spoofax/IMP-generated editor for the CompanyEntities language"
+  url           : http://strategoxt.org
+                  
+  extensions    : cpe
+  table         : include/CompanyEntities.tbl
+  start symbols : Start

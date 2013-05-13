@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?eclipse version="3.0"?>
+
+<plugin>
+       <extension point="org.eclipse.imp.runtime.languageDescription">
+          <language extensions="cpe" description="CompanyEntities" language="CompanyEntities" derivedFrom="DynamicRoot" validator="com.pany.entities.CompanyEntitiesValidator" validatorClass="com.pany.entities.CompanyEntitiesValidator"></language>
+       </extension>
+       <extension id="com.pany.entities.parser" name="CompanyEntities Parser" point="org.eclipse.imp.runtime.parser">
+          <parser class="com.pany.entities.CompanyEntitiesParseController" language="CompanyEntities">
+          </parser>
+       </extension>    
+    </plugin>

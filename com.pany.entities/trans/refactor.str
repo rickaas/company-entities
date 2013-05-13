@@ -1,0 +1,12 @@
+module refactor
+
+imports
+  lib-refactoring/rename-refactoring.generated
+  check
+  lib/nbl-library.generated
+
+rules
+  
+  //multifile rename refactoring based in name index and name analysis
+  rename-refactoring:
+    (newname, oldname{ref}, position, ast, path, project-path) -> <generic-rename-refactoring(id, constraint-error, constraint-warning)>
