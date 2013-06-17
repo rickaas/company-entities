@@ -1,6 +1,33 @@
 <?xml version="1.0"?>
 <project name="org.strategoxt.ant.instrument">
 
+	<property name="dsldi.extra.args" value="" />
+	<property name="dsldi.exclude.args" value="" />
+	<property name="str.debug.instrumentation.sourcedir" value="." />
+	<property name="str.debug.instrumentation.targetdir" value="." />
+	   <!-- Classpath for building outside of Eclipse -->
+	    <path id="foo.external.class.path">
+	        <pathelement path="${java.class.path}"/>
+	        <fileset dir="${utils}">
+	            <include name="**/*.jar"/>
+	        </fileset>
+	    </path>
+	
+	<available classname="org.strategoxt.imp.debuggers.stratego.instrumentation.Main" 
+		property="can.use.dsldi" 
+		classpathref="foo.external.class.path" />
+    <available classname="org.strategoxt.strj.Main" 
+    	property="can.use.strj" 
+    	classpathref="foo.external.class.path" />
+	
+	<property name="can.use.dsldi" value="no" />
+	<property name="can.use.strj" value="no" />
+
+	<target name="check.dsldi">
+		   <echo message="can use dsldi: ${can.use.dsldi}"/>
+		<echo message="can use strj: ${can.use.strj}"/>
+	</target>
+	
 	<!-- instrument stratego files with debug events -->
 	<macrodef name="strategoxt-dsldi">
 		<attribute name="input-dir" />
@@ -13,6 +40,7 @@
 			<uptodate-mio input="@{input-dir}" output="@{output-dir}" type="strategoxt-dsldi">
 				<action>
 					<java classname="org.strategoxt.imp.debuggers.stratego.instrumentation.Main" 
+						classpathref="foo.external.class.path"
 						failonerror="true">
 						<arg value="--input-dir" />
 						<arg value="${@{input-dir}.abs}" />
@@ -50,4 +78,6 @@
 			</str-dsldi-deps>
 		</strategoxt-dsldi>
 	</target>
+	
+	
 </project>

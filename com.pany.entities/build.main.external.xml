@@ -2,7 +2,13 @@
 
 <project name="CompanyEntities" default="all">
 
+    <!-- Import Ant contrib -->
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties" />
+
 	<loadproperties srcFile="config.properties" />
+    <!-- Import Stratego/XT Ant contributions -->
+    <import file="ant-contrib/strategoxt-test.xml" />
+
 
 	<!-- Key input modules -->
 	<property name="sdfmodule" value="CompanyEntities"/>
@@ -51,10 +57,44 @@
 		<pathelement path="${java.class.path}"/>
 		<fileset dir="${utils}">
 			<include name="**/*.jar"/>
+			<!--<include name="aster.jar"/>-->
 		</fileset>
 	</path>
 
 
 	<!-- Main target -->
 	<target name="all" depends="spoofaximp.default.jar"/>
+
+	<!--<property name="strj.mainclass" value="StrMainDisableEvents" />-->
+	<property name="strj.mainclass" value="org.strategoxt.strj.Main" />
+
+	<!-- overload task -->
+	<target name="stratego.jvm.helper" unless="strc-java.available" if="build.stratego.enabled">
+		<echo>Let do str to java</echo>
+		<delete file="${include}/${strmodule}.rtree" failonerror="false"/>
+		<java classname="${strj.mainclass}" failonerror="true" classpathref="external.class.path" fork="true">
+  <jvmarg value="-Xdebug" />
+  <!--<jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5432" />-->
+  <jvmarg value="-Xss8m"/>
+  <jvmarg value="-Xmx1024m"/>
+  <jvmarg value="-server"/>
+  <jvmarg value="-XX:+UseParallelGC"/>
+  <jvmarg value="-XX:MaxPermSize=256m"/>
+			<arg value="-i"/>
+			<arg value="${trans}/${strmodule}.str"/>
+			<arg value="-o"/>
+			<arg value="${build.stratego.outputfile}"/>
+			<arg value="-p"/>
+			<arg value="trans"/>
+			<arg value="--library"/>
+			<arg value="--clean"/>
+			<arg line="${build.stratego.args}"/>
+			<arg line="${build.stratego.extraargs}"/>
+			<arg line="${externaljarflags}"/>
+			<arg line="${externaldefimport}"/>
+			<arg line="-I &quot;${lib}&quot; -I &quot;${include}&quot; --cache-dir &quot;${basedir}/.cache&quot;"/>
+		</java>
+		<delete file="${include}/${strmodule}.rtree" failonerror="false"/>
+		<mkdir dir="${build}/trans"/>
+	</target>
 </project>

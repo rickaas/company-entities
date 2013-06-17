@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <project name="CompanyEntities" default="all">
-        
+
+    <loadproperties srcFile="config.properties" />
+	
         <!-- Key input modules -->
         <property name="sdfmodule" value="CompanyEntities"/>
         <property name="metasdfmodule" value="Stratego-CompanyEntities"/>
@@ -30,7 +32,9 @@
         <property name="externaljar" value="../lib.jar"/>
         <property name="externaljarflags" value="-la org.lib"/>
         -->
-    
+    <property name="externaljar" value="${str.debug.runtime.library}/org.strategoxt.imp.debuggers.stratego.runtime.jar"/>
+    <property name="externaljarflags" value="-I ${str.debug.runtime.library} -la org.strategoxt.imp.debuggers.stratego.runtime.strategies"/>
+
         <!-- Environment configuration for command-line builds -->
         <condition property="build.strategoxt.sdf" value="${eclipse.spoofaximp.nativeprefix}" else="">
             <isset property="eclipse.spoofaximp.nativeprefix"/>
