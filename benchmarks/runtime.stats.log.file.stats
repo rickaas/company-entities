@@ -1,0 +1,6 @@
+filename	Enter-event-count	Exit-event-count	Step-event-count	program-term-size	parse-time	instrumentation-time	write-time	file-total-time
+generate.str	8	8	31	368	0.68	0.28	0.59	1.57
+names.str	22	22	19	636	0.17	0.11	0.51	0.79
+check.str	2	2	3	74	0.03	0.01	0.04	0.08
+refactor.str	1	1	4	47	0.02	0.0	0.03	0.05
+companyentities.str	18	18	147	1139	0.23	0.14	0.53	0.9
